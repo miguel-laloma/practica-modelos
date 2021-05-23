@@ -26,6 +26,12 @@ public class JFlexScraper {
 
     HTMLParser analizador;
 
+    /**
+     * Este método actúa como un Autómata y se encarga de leer el código de la
+     * página web y obtener sus hiperenlaces e imágenes.
+     *
+     * @Param fichero fichero con el contenido de la página web.
+     */
     public JFlexScraper(File fichero) throws FileNotFoundException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
@@ -127,8 +133,11 @@ public class JFlexScraper {
         return new ArrayList<String>();
     }
 
+    /*
+     * Método encargado de indicar si la construcción del documento es adecuada.
+     */
     public boolean esDocumentoHTMLBienBalanceado() {
-        // Habrá que programarlo..
+        System.out.println("El documento está balanceado correctamente: ");
         return !malBalanceado || !etiquetasAbiertas.empty();
     }
 }

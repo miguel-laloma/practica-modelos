@@ -1,5 +1,9 @@
 package es.ceu.gisi.modcomp.webcrawler;
 
+import es.ceu.gisi.modcomp.webcrawler.jflex.JFlexScraper;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  * Esta aplicación contiene el programa principal que ejecuta ambas partes del
  * proyecto de programación.
@@ -8,14 +12,14 @@ package es.ceu.gisi.modcomp.webcrawler;
  */
 public class WebCrawler {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // Deberá inicializar JFlexScraper con el fichero HTML a analizar
         // Y creará un fichero con todos los hiperenlaces que encuentre.
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
         
-        //JFlexScraper jfs = new JFLexScraper("web.html");
-        //jfs.obtenerHiperenlaces();
+        JFlexScraper jfs = new JFlexScraper(new File("web.html"));
+        jfs.esDocumentoHTMLBienBalanceado();
 
         // Deberá inicializar JsoupScraper con la DIRECCIÓN HTTP de una página
         // web a analizar. Creará un fichero con todos los hiperenlaces que
