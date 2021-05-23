@@ -13,6 +13,9 @@ public class WebCrawler {
         // Y creará un fichero con todos los hiperenlaces que encuentre.
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
+        
+        JFlexScraper jfs = new JFLexScraper("web.html");
+        jfs.obtenerHiperenlaces();
 
         // Deberá inicializar JsoupScraper con la DIRECCIÓN HTTP de una página
         // web a analizar. Creará un fichero con todos los hiperenlaces que
