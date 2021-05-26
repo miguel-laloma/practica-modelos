@@ -128,7 +128,7 @@ public class HTMLParserTest {
             assertTrue(false);
         }
     }
-    /*
+    
     @Test
     public void malBalanceado(){
         try {
@@ -138,5 +138,4 @@ public class HTMLParserTest {
             Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    */
 }

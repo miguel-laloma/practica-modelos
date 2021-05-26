@@ -12,6 +12,7 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el analizador Jsoup.
@@ -52,11 +53,9 @@ public class JsoupScraper {
      *
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
-    public int estadisticasEtiqueta(String etiqueta) {
-        // lista = getElementByTag(etiqueta);
-        // return lista.size();
-        // Habrá que programarlo..
-        return 0;
+    public int estadisticasEtiqueta(String etiqueta){
+        Elements links = doc.getElementsByTag(etiqueta);
+        return links.size();
     }
 
     /**
@@ -65,7 +64,12 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlaces() {
-        // Habrá que programarlo..
+        Elements links = doc.getElementsByTag("a");
+        for (Element link : links) {
+            System.out.println(link);
+            String linkHref = link.attr("href");
+            String linkText = link.text();
+        }
         return new ArrayList<String>();
     }
 
@@ -75,7 +79,6 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
         return new ArrayList<String>();
     }
 

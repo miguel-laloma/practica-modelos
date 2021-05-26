@@ -37,7 +37,6 @@ public class JFlexScraper {
         analizador = new HTMLParser(reader);
 
     try{
-        System.out.println("Comienzo autómata");
         int estado = 0;
         Token tk = analizador.nextToken();
         
@@ -46,6 +45,8 @@ public class JFlexScraper {
         boolean valorHREF = false;
         boolean valorSRC = false;
  
+        System.out.println("ejecución");
+        
         while(tk != null){
             switch (estado){
                 case 0:
@@ -133,14 +134,12 @@ public class JFlexScraper {
     }
 
     public ArrayList<String> obtenerHiperenlaces() {
-        System.out.println("La web contiene " + enlacesA.size() + " enlaces.");
-        System.out.println(enlacesA);
+        System.out.println("Enlaces -> " + enlacesA.size());
         return enlacesA;
     }
 
     public ArrayList<String> obtenerHiperenlacesImagenes() {
-        System.out.println("La web contiene " + enlacesIMG.size() + " enlaces a imágenes.");
-        System.out.println(enlacesIMG);
+        System.out.println("Enlaces a imágenes -> " + enlacesIMG.size());
         return enlacesIMG;
     }
 
@@ -149,7 +148,7 @@ public class JFlexScraper {
      */
     public boolean esDocumentoHTMLBienBalanceado() {
         System.out.print("El documento está balanceado correctamente: ");
-        System.out.println(!malBalanceado || !etiquetasAbiertas.empty());
-        return (!malBalanceado || !etiquetasAbiertas.empty());
+        //return !(malBalanceado || etiquetasAbiertas.empty());
+        return !(malBalanceado && etiquetasAbiertas.empty());
     }
 }

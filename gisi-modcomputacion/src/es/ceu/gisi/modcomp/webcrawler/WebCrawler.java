@@ -19,21 +19,40 @@ public class WebCrawler {
         // Y creará un fichero con todos los hiperenlaces que encuentre.
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
-        
-        //JFlexScraper jfs = new JFlexScraper(new File("ejemplo.html"));
+    
+        /*
         JFlexScraper jfs = new JFlexScraper(new File("web.html"));
-        jfs.obtenerHiperenlaces();
-        jfs.obtenerHiperenlacesImagenes();
         //FileNotFoundException
-        jfs.esDocumentoHTMLBienBalanceado();
+        System.out.println(jfs.obtenerHiperenlaces());
+        System.out.println(jfs.obtenerHiperenlacesImagenes());
+        System.out.println(jfs.esDocumentoHTMLBienBalanceado());
+        */
 
         // Deberá inicializar JsoupScraper con la DIRECCIÓN HTTP de una página
         // web a analizar. Creará un fichero con todos los hiperenlaces que
         // encuentre en la página web. También obtendrá estadísticas de uso 
         // de las etiquetas HTML más comunes: a, br, div, li, ul, p, span, table, td, tr
 
-        //JsoupScraper jss = new JsoupScraper(new URL("https://www.xtralife.com/#"));
+        JsoupScraper jss = new JsoupScraper(new URL("https://twitter.com/explore"));
         //MalformedURLException
         //IOException
+
+        /*
+        System.out.println("Estadísticas de uso de etiquetas:" + 
+                                "\n - a: " + jss.estadisticasEtiqueta("a") +
+                                "\n - br: " + jss.estadisticasEtiqueta("br") +
+                                "\n - liv: " + jss.estadisticasEtiqueta("liv") +
+                                "\n - li: " + jss.estadisticasEtiqueta("li") +
+                                "\n - ul: " + jss.estadisticasEtiqueta("ul") +
+                                "\n - p: " + jss.estadisticasEtiqueta("p") +
+                                "\n - span: " + jss.estadisticasEtiqueta("span") +
+                                "\n - table: " + jss.estadisticasEtiqueta("table") +
+                                "\n - td: " + jss.estadisticasEtiqueta("td") +
+                                "\n - tr: " + jss.estadisticasEtiqueta("tr"));
+        */
+        System.out.println(jss.obtenerHiperenlaces());
+        //System.out.println(jss.obtenerContenidoImg());
+
+
     }
 }
