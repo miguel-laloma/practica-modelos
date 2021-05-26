@@ -64,13 +64,14 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlaces() {
+        ArrayList<String> enlacesA = new ArrayList<String>();
         Elements links = doc.getElementsByTag("a");
         for (Element link : links) {
-            System.out.println(link);
             String linkHref = link.attr("href");
-            String linkText = link.text();
+            enlacesA.add(linkHref);
         }
-        return new ArrayList<String>();
+        System.out.println("Enlaces -> " + enlacesA.size());
+        return enlacesA;
     }
 
     /**
@@ -79,7 +80,14 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlacesImagenes() {
-        return new ArrayList<String>();
+        ArrayList<String> enlacesIMG = new ArrayList<String>();
+        Elements links = doc.getElementsByTag("img");
+        for (Element link : links) {
+            String linkSrc = link.attr("src");
+            enlacesIMG.add(linkSrc);
+        }
+        System.out.println("Enlaces a imágenes -> " + enlacesIMG.size());
+        return enlacesIMG;
     }
 
 

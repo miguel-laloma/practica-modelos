@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import java.util.ArrayList;
 
 /**
  * Clase que testea y muestra el uso del analizador léxico creado con JFlex.
@@ -129,6 +130,27 @@ public class HTMLParserTest {
         }
     }
     
+    @Test (expected = FileNotFoundException.class)
+    public void existeElFichero() throws FileNotFoundException {
+        JFlexScraper jfs = new JFlexScraper(new File("ficheroInexistente.txt"));
+    }
+
+    @Test
+    public void obtieneEnlaces() throws FileNotFoundException {
+        JFlexScraper jfs = new JFlexScraper(ficheroPrueba2);
+        ArrayList<String> enlaces = new ArrayList<String>();
+        enlaces.add("http://www.bbc.co.uk");
+        assertEquals(enlaces, jfs.obtenerHiperenlaces());
+    }
+
+    @Test
+    public void obtieneImagenes() throws FileNotFoundException {
+        JFlexScraper jfs = new JFlexScraper(ficheroPrueba2);
+        ArrayList<String> imagenes = new ArrayList<String>();
+        imagenes.add("brushedsteel.jpg");
+        assertEquals(imagenes, jfs.obtenerHiperenlacesImagenes());
+    }
+
     @Test
     public void malBalanceado(){
         try {
