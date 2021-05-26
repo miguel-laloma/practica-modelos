@@ -36,7 +36,8 @@ public class JFlexScraper {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
 
-    try{    
+    try{
+        System.out.println("Comienzo autómata");
         int estado = 0;
         Token tk = analizador.nextToken();
         
@@ -50,6 +51,8 @@ public class JFlexScraper {
                 case 0:
                     if(tk.getTipo() == Tipo.OPEN){
                         estado = 1;
+                    } else {
+                        estado = 0;
                     }
                     break;
                 case 1:
@@ -68,12 +71,13 @@ public class JFlexScraper {
                 case 2:
                     if(tk.getTipo() == Tipo.PALABRA){
                         estado = 3;
-                            if(etiquetaA){
-                                if(tk.getValor().equalsIgnoreCase("href")){
-                                    valorHREF = true;
-                            }else if (etiquetaIMG)
-                                if(tk.getValor().equalsIgnoreCase("src")){
-                                    valorSRC = true;
+                        if(etiquetaA){
+                            if(tk.getValor().equalsIgnoreCase("href")){
+                                valorHREF = true;
+                            }
+                        }else if (etiquetaIMG){
+                            if(tk.getValor().equalsIgnoreCase("src")){
+                                valorSRC = true;
                             }
                         }
                     }else if(tk.getTipo() == Tipo.SLASH){
@@ -89,10 +93,15 @@ public class JFlexScraper {
                     break;
                 case 4:
                     if(tk.getTipo() == Tipo.VALOR){
+                        estado = 2;
                         if(valorHREF){
                             enlacesA.add(tk.getValor());
+                            etiquetaA = false;
+                            valorHREF = false;
                         }else if(valorSRC){
                             enlacesIMG.add(tk.getValor());
+                            etiquetaIMG = false;
+                            valorSRC = false;
                         }
                     }
                     break;
@@ -115,8 +124,8 @@ public class JFlexScraper {
                     if(tk.getTipo() == Tipo.CLOSE){
                         estado = 0;
                     }
-            tk = analizador.nextToken();
             }
+            tk = analizador.nextToken();
         }
     }catch (IOException e){
         System.out.println("Error al leer el fichero");
@@ -125,11 +134,13 @@ public class JFlexScraper {
 
     public ArrayList<String> obtenerHiperenlaces() {
         System.out.println("La web contiene " + enlacesA.size() + " enlaces.");
+        System.out.println(enlacesA);
         return enlacesA;
     }
 
     public ArrayList<String> obtenerHiperenlacesImagenes() {
         System.out.println("La web contiene " + enlacesIMG.size() + " enlaces a imágenes.");
+        System.out.println(enlacesIMG);
         return enlacesIMG;
     }
 
@@ -137,7 +148,8 @@ public class JFlexScraper {
      * Método encargado de indicar si la construcción del documento es adecuada.
      */
     public boolean esDocumentoHTMLBienBalanceado() {
-        System.out.println("El documento está balanceado correctamente: ");
-        return !malBalanceado || !etiquetasAbiertas.empty();
+        System.out.print("El documento está balanceado correctamente: ");
+        System.out.println(!malBalanceado || !etiquetasAbiertas.empty());
+        return (!malBalanceado || !etiquetasAbiertas.empty());
     }
 }

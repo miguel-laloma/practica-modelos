@@ -53,7 +53,8 @@ public class JsoupScraper {
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
     public int estadisticasEtiqueta(String etiqueta) {
-        //getElementByTag
+        // lista = getElementByTag(etiqueta);
+        // return lista.size();
         // Habrá que programarlo..
         return 0;
     }

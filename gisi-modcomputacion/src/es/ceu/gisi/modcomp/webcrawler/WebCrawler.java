@@ -20,7 +20,10 @@ public class WebCrawler {
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
         
+        //JFlexScraper jfs = new JFlexScraper(new File("ejemplo.html"));
         JFlexScraper jfs = new JFlexScraper(new File("web.html"));
+        jfs.obtenerHiperenlaces();
+        jfs.obtenerHiperenlacesImagenes();
         //FileNotFoundException
         jfs.esDocumentoHTMLBienBalanceado();
 
@@ -29,7 +32,7 @@ public class WebCrawler {
         // encuentre en la página web. También obtendrá estadísticas de uso 
         // de las etiquetas HTML más comunes: a, br, div, li, ul, p, span, table, td, tr
 
-        JsoupScraper jss = new JsoupScraper(new URL("https://www.xtralife.com/#"));
+        //JsoupScraper jss = new JsoupScraper(new URL("https://www.xtralife.com/#"));
         //MalformedURLException
         //IOException
     }
