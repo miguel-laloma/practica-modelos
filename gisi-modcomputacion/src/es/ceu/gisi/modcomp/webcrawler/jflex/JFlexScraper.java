@@ -124,13 +124,13 @@ public class JFlexScraper {
     }
 
     public ArrayList<String> obtenerHiperenlaces() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+        System.out.println("La web contiene " + enlacesA.size() + " enlaces.");
+        return enlacesA;
     }
 
     public ArrayList<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+        System.out.println("La web contiene " + enlacesIMG.size() + " enlaces a imágenes.");
+        return enlacesIMG;
     }
 
     /*

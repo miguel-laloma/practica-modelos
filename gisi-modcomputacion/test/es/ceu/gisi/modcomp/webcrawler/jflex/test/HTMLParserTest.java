@@ -1,5 +1,6 @@
 package es.ceu.gisi.modcomp.webcrawler.jflex.test;
 
+import es.ceu.gisi.modcomp.webcrawler.jflex.JFlexScraper;
 import es.ceu.gisi.modcomp.webcrawler.jflex.HTMLParser;
 import es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo;
 import es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Token;
@@ -26,6 +27,7 @@ public class HTMLParserTest {
 
     private File ficheroPrueba1 = new File(PATH_PRUEBAS + "prueba1.html");
     private File ficheroPrueba2 = new File(PATH_PRUEBAS + "prueba2.html");
+    private File ficheroPrueba3 = new File(PATH_PRUEBAS + "prueba3.html");
     private Reader reader1;
     private Reader reader2;
     HTMLParser analizador;
@@ -124,6 +126,16 @@ public class HTMLParserTest {
         } catch (IOException ex) {
             Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
             assertTrue(false);
+        }
+    }
+    
+    @Test
+    public void malBalanceado(){
+        try {
+            JFlexScraper jfs = new JFlexScraper(ficheroPrueba3);
+            assertFalse(jfs.esDocumentoHTMLBienBalanceado());
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
