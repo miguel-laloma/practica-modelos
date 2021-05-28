@@ -169,10 +169,6 @@ public class JFlexScraper {
      */
     public boolean esDocumentoHTMLBienBalanceado() {
         System.out.print("El documento está balanceado correctamente: ");
-        //return !(malBalanceado || etiquetasAbiertas.empty());
-        System.out.println(malBalanceado);
-        System.out.println(etiquetasAbiertas.empty());
-        System.out.println(etiquetasAbiertas);
         return !malBalanceado && etiquetasAbiertas.empty();
     }
 }
