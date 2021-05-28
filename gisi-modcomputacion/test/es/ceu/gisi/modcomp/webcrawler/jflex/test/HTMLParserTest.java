@@ -129,35 +129,5 @@ public class HTMLParserTest {
             assertTrue(false);
         }
     }
-    
-    @Test (expected = FileNotFoundException.class)
-    public void existeElFichero() throws FileNotFoundException {
-        JFlexScraper jfs = new JFlexScraper(new File("ficheroInexistente.txt"));
-    }
 
-    @Test
-    public void obtieneEnlaces() throws FileNotFoundException {
-        JFlexScraper jfs = new JFlexScraper(ficheroPrueba2);
-        ArrayList<String> enlaces = new ArrayList<String>();
-        enlaces.add("http://www.bbc.co.uk");
-        assertEquals(enlaces, jfs.obtenerHiperenlaces());
-    }
-
-    @Test
-    public void obtieneImagenes() throws FileNotFoundException {
-        JFlexScraper jfs = new JFlexScraper(ficheroPrueba2);
-        ArrayList<String> imagenes = new ArrayList<String>();
-        imagenes.add("brushedsteel.jpg");
-        assertEquals(imagenes, jfs.obtenerHiperenlacesImagenes());
-    }
-
-    @Test
-    public void malBalanceado(){
-        try {
-            JFlexScraper jfs = new JFlexScraper(ficheroPrueba3);
-            assertFalse(jfs.esDocumentoHTMLBienBalanceado());
-        } catch (IOException ex) {
-            Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

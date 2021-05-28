@@ -13,6 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import java.io.FileWriter;
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el analizador Jsoup.
@@ -63,13 +64,20 @@ public class JsoupScraper {
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
-    public List<String> obtenerHiperenlaces() {
+    public List<String> obtenerHiperenlaces() throws IOException {
         ArrayList<String> enlacesA = new ArrayList<String>();
+        FileWriter fw = new FileWriter("enlaces_jsoup.txt");
+
         Elements links = doc.getElementsByTag("a");
         for (Element link : links) {
             String linkHref = link.attr("href");
             enlacesA.add(linkHref);
         }
+
+        for (String link : enlacesA) {
+            fw.write(link);
+        }
+
         System.out.println("Enlaces -> " + enlacesA.size());
         return enlacesA;
     }
@@ -79,13 +87,20 @@ public class JsoupScraper {
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
-    public List<String> obtenerHiperenlacesImagenes() {
+    public List<String> obtenerHiperenlacesImagenes() throws IOException {
         ArrayList<String> enlacesIMG = new ArrayList<String>();
+        FileWriter fw = new FileWriter("enlacesIMG_jflex.txt");
+
         Elements links = doc.getElementsByTag("img");
         for (Element link : links) {
             String linkSrc = link.attr("src");
             enlacesIMG.add(linkSrc);
         }
+
+        for (String link : enlacesIMG) {
+            fw.write(link);
+        }
+
         System.out.println("Enlaces a imágenes -> " + enlacesIMG.size());
         return enlacesIMG;
     }

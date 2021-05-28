@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.Reader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class JFlexScraper {
                         }else if(tk.getValor().equalsIgnoreCase("img")){
                             etiquetaIMG = true;
                         }
+                        
                     }else if(tk.getTipo() == Tipo.SLASH){
                         estado = 6;
                     }
@@ -83,6 +85,7 @@ public class JFlexScraper {
                         }
                     }else if(tk.getTipo() == Tipo.SLASH){
                         estado = 5;
+                        etiquetasAbiertas.pop();
                     }else if(tk.getTipo() == Tipo.CLOSE){
                         estado = 0;
                     }
@@ -133,13 +136,31 @@ public class JFlexScraper {
     }
     }
 
-    public ArrayList<String> obtenerHiperenlaces() {
+    /*
+     * Método encargado de recolectar los enlaces en el fichero html.
+     */
+    public ArrayList<String> obtenerHiperenlaces() throws IOException {
         System.out.println("Enlaces -> " + enlacesA.size());
+        FileWriter fw = new FileWriter("enlaces_jflex.txt");
+
+        for (String link : enlacesA) {
+            fw.write(link);
+        }
+        
         return enlacesA;
     }
 
-    public ArrayList<String> obtenerHiperenlacesImagenes() {
+    /*
+     * Método encargado de recolectar los enlaces en el fichero html.
+     */
+    public ArrayList<String> obtenerHiperenlacesImagenes() throws IOException {
         System.out.println("Enlaces a imágenes -> " + enlacesIMG.size());
+        FileWriter fw = new FileWriter("enlacesIMG_jflex.txt");
+
+        for (String link : enlacesIMG) {
+            fw.write(link);
+        }
+
         return enlacesIMG;
     }
 
@@ -149,6 +170,9 @@ public class JFlexScraper {
     public boolean esDocumentoHTMLBienBalanceado() {
         System.out.print("El documento está balanceado correctamente: ");
         //return !(malBalanceado || etiquetasAbiertas.empty());
-        return !(malBalanceado && etiquetasAbiertas.empty());
+        System.out.println(malBalanceado);
+        System.out.println(etiquetasAbiertas.empty());
+        System.out.println(etiquetasAbiertas);
+        return !malBalanceado && etiquetasAbiertas.empty();
     }
 }
